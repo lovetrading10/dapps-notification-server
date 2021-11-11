@@ -41,7 +41,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Trigger deployment - stg
-        id: deploy
+        id: deploy1
         uses: decentraland/dcl-deploy-action@main
         with:
           dockerImage: "${{ steps.push-to-quay.outputs.registry-path }}"
@@ -50,7 +50,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Trigger deployment - prd
-        id: deploy
+        id: deploy2
         uses: decentraland/dcl-deploy-action@main
         with:
           dockerImage: "${{ steps.push-to-quay.outputs.registry-path }}"
