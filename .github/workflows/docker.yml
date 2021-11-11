@@ -31,11 +31,29 @@ jobs:
       - name: Print image url
         run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
 
-      - name: Trigger deployment
+      - name: Trigger deployment - dev
         id: deploy
         uses: decentraland/dcl-deploy-action@main
         with:
           dockerImage: "${{ steps.push-to-quay.outputs.registry-path }}"
           serviceName: dapps-notification-server
           env: dev
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger deployment - stg
+        id: deploy
+        uses: decentraland/dcl-deploy-action@main
+        with:
+          dockerImage: "${{ steps.push-to-quay.outputs.registry-path }}"
+          serviceName: dapps-notification-server
+          env: stg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger deployment - prd
+        id: deploy
+        uses: decentraland/dcl-deploy-action@main
+        with:
+          dockerImage: "${{ steps.push-to-quay.outputs.registry-path }}"
+          serviceName: dapps-notification-server
+          env: prd
           token: ${{ secrets.GITHUB_TOKEN }}
